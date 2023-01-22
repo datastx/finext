@@ -1,0 +1,5 @@
+FROM bitnami/postgresql:13
+
+ENV POSTGRESQL_PASSWORD=thepass123 POSTGRESQL_USERNAME=hero POSTGRESQL_DATABASE=hero_db
+
+ADD init_db.sql /docker-entrypoint-initdb.d

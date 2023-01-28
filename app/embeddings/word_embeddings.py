@@ -10,6 +10,14 @@ DAVINCI = "text-similarity-davinci-001"
 ADA = "text-embedding-ada-002"
 
 def embedding(text: str) -> np.array:
+    """_summary_
+
+    Args:
+        text (str): _description_
+
+    Returns:
+        np.array: _description_
+    """
     return get_embedding(text, engine=DAVINCI)
 
 
@@ -26,6 +34,15 @@ def get_corpus(location: str) -> pd.DataFrame:
     return df 
 
 def cacluate_embeddings(df: pd.DataFrame, search_term_vector: np.array) -> pd.DataFrame:
+    """_summary_
+
+    Args:
+        df (pd.DataFrame): _description_
+        search_term_vector (np.array): _description_
+
+    Returns:
+        pd.DataFrame: _description_
+    """
     df['embedding'] = df['text'].apply( lambda x : embedding(x))
     df['embedding'] = df['embedding'].apply(np.array)
     df["similarities"] = df['embedding'].apply(lambda x: cosine_similarity(x, search_term_vector))
